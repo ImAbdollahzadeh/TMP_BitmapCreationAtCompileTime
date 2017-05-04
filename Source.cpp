@@ -1,4 +1,3 @@
-#include <iostream>
 #define construct typedef
 struct _Null {};
 template<typename... _ListOfPixel> struct ConcatPixels;
@@ -158,41 +157,36 @@ template<typename _Bitmap1, typename _Bitmap2, typename... _Bitmap> struct AddBi
 	typedef typename _Bitmap1::__ListOfPixels firstBitmapListOfPixels;
 	typedef typename _Bitmap2::__ListOfPixels secondBitmapListOfPixels;
 	typedef ListOfPixels<
-							typename ConcatPixels<
-								firstBitmapListOfPixels,
-								secondBitmapListOfPixels
-							>::result
-															> resultedFirstTwoConcatanated;
+				typename ConcatPixels<
+					firstBitmapListOfPixels,
+					secondBitmapListOfPixels
+				>::result
+								> resultedFirstTwoConcatanated;
 	typedef typename AddBitmaps<Bitmap<squareSize, resultedFirstTwoConcatanated>, _Bitmap...>::result result;
 };
-
-
 template<typename _Bitmap> struct AddBitmaps<_Bitmap, _Null> {
 	static constexpr int squareSize = _Bitmap::squareSize;
 	typedef typename Bitmap::__ListOfPixels firstBitmapListOfPixels;
 	typedef ListOfPixels<typename ConcatPixels<firstBitmapListOfPixels>::result> resultedLastConcatanated;
 	typedef typename Bitmap<squareSize, resultedLastConcatanated> result;
 };
-int main()
-{
+int main() {
 	construct RGB<1, 1, 1> White;
-	
 	construct Bitmap<512, ListOfPixels<
-											Pixel<0, 1, White>,
-											Pixel<1, 1, White>,
-											Pixel<8, 6, White>
-									  >
-																	> bitmap;
+						Pixel<0, 1, White>,
+						Pixel<1, 1, White>,
+						Pixel<8, 6, White>
+									>
+										> bitmap;
 	construct Bitmap<512, ListOfPixels<
-											Pixel<0, 1, White>
-									  >
-	                                                                > bitmap2;
+						Pixel<0, 1, White>
+									>
+	                                                                	> bitmap2;
 	construct Bitmap<512, ListOfPixels<
-											Pixel<18, 1, White>,
-											Pixel<0, 21, White>
-									  >
-																	> bitmap3;
+						Pixel<18, 1, White>,
+						Pixel<0, 21, White>
+									>
+										> bitmap3;
 	construct AddBitmaps<bitmap, bitmap2, bitmap3> sum;
-
-	/*test*/ construct Subtract<Color::WHITE, Subtract_Green> newColor;
+	construct Subtract<Color::WHITE, Subtract_Green> newColor;
 }
