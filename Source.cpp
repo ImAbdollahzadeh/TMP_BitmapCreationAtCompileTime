@@ -242,7 +242,7 @@ int main() {
 								   SmallBitmap::EncodedPixel<196, WHITE>
 													    >
 													       > bitmap_3;
-	construct SmallBitmap::Add_SmallBitmaps<bitmap_2, bitmap_3>::result AddedBitmaps;
-	SmallBitmap::Print<AddedBitmaps::result>::pr();
-	SmallBitmap::Print<bitmap_2::result>::pr();
+	construct SmallBitmap::Add_SmallBitmaps<bitmap_2, bitmap_3> AddedBitmaps;
+	SmallBitmap::Print<typename AddedBitmaps::result>::pr();
+	SmallBitmap::Print<typename bitmap_2::result>::pr();
 }
