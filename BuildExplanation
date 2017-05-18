@@ -1,0 +1,7 @@
+On VisualStudio 2015, Update 3, the build on Debug mode on x86, took 107 sec to complete (the whole build output 
+has been provided in a separate file called BuildOverView).
+
+The entire SmallBitmap creation is done at compile time. This is why with MS VC++ compiler, it is almost impossible to increase the pixel size of the final Bitmap arbitrarily
+high.
+
+On GCC 6.3 comiler, I could build and run up to 900 input pixels.
