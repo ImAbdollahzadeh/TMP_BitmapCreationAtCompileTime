@@ -166,6 +166,16 @@ namespace SmallBitmap {
 		typedef typename ZeroList<0, Square_Size>::result blackList;
 		typedef typename ListMaker<Square_Size, blackList, _ListOfPixels>::result result;
 	};
+	template<typename SBitmap1, typename... SBitmaps> struct Add_SmallBitmaps {
+		static constexpr int SquareSize = SBitmap1::SquareSize;
+		typedef typename ZeroList<0, SquareSize>::result blackList;
+		typedef typename ConcatanatePixels<typename SBitmap1::result, typename Add_SmallBitmaps<SBitmaps...>::_result>::result _ListOfPixels;
+		typedef typename SmallBitmap<SquareSize, _ListOfPixels>::result result;
+	};
+	template<typename SBitmap_last> struct Add_SmallBitmaps<SBitmap_last> {
+		static constexpr int SquareSize = SBitmap_last::SquareSize;
+		typedef typename SBitmap_last::result _result;
+	};
 	template<typename list> struct Print {
 		static void pr() {
 			std::cout << list::head::coordinate << "-> R: " <<
@@ -225,5 +235,14 @@ int main() {
 								   SmallBitmap::EncodedPixel<127, WHITE>
 													    >
 													       > bitmap_2;
+	construct 
+		SmallBitmap::SmallBitmap<500, 
+					 SmallBitmap::ListOfPixels<
+								   SmallBitmap::EncodedPixel<201, WHITE>,
+								   SmallBitmap::EncodedPixel<196, WHITE>
+													    >
+													       > bitmap_3;
+	construct SmallBitmap::Add_SmallBitmaps<bitmap_2, bitmap_3>::result AddedBitmaps;
+	SmallBitmap::Print<AddedBitmaps::result>::pr();
 	SmallBitmap::Print<bitmap_2::result>::pr();
 }
