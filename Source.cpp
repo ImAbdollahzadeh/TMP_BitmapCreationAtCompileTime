@@ -17,10 +17,10 @@ namespace Bitwise {
 	};
 }
 enum Color {
-	RED   = 0x00ff0000,
-	GREEN = 0x0000ff00,
-	BLUE  = 0x000000ff,
-	WHITE = Bitwise::Or <Bitwise::Or <RED, GREEN>::result, BLUE>::result,
+	RED   = 0x00FF0000,
+	GREEN = 0x0000FF00,
+	BLUE  = 0x000000FF,
+	WHITE = Bitwise::Or<Bitwise::Or<RED, GREEN>::result,   BLUE>::result,
 	BLACK = Bitwise::And<Bitwise::And<RED, GREEN>::result, BLUE>::result
 };
 template<int r, int g, int b> struct RGB {
@@ -29,9 +29,9 @@ template<int r, int g, int b> struct RGB {
 	static constexpr int Blue  = b;
 };
 template<int _color> struct RGB_From_Color {
-	static constexpr int Red   = Bitwise::RightBitShift<Bitwise::And <_color, 0x00ff0000>::result, 0x10>::result;
-	static constexpr int Green = Bitwise::RightBitShift<Bitwise::And <_color, 0x0000ff00>::result, 0x08>::result;
-	static constexpr int Blue  = Bitwise::RightBitShift<Bitwise::And <_color, 0x000000ff>::result, 0x00>::result;
+	static constexpr int Red   = Bitwise::RightBitShift<Bitwise::And <_color, 0x00FF0000>::result, 0x10>::result;
+	static constexpr int Green = Bitwise::RightBitShift<Bitwise::And <_color, 0x0000FF00>::result, 0x08>::result;
+	static constexpr int Blue  = Bitwise::RightBitShift<Bitwise::And <_color, 0x000000FF>::result, 0x00>::result;
 };
 template<int x, int y, typename _RGB> struct pixel {
 	static constexpr int X = x;
@@ -217,13 +217,13 @@ int main()
 		bitmap::BitmapPixelSize
 	);
 	construct SmallBitmap::SmallBitmap<500, SmallBitmap::ListOfPixels<
-																		SmallBitmap::EncodedPixel<1,   WHITE>,
-																		SmallBitmap::EncodedPixel<12,  WHITE>,
-																		SmallBitmap::EncodedPixel<15,  WHITE>,
-																		SmallBitmap::EncodedPixel<45,  WHITE>,
-																		SmallBitmap::EncodedPixel<96,  WHITE>,
-																		SmallBitmap::EncodedPixel<127, WHITE>
-																												>
-																													> bitmap_2;
+										SmallBitmap::EncodedPixel<1,   WHITE>,
+										SmallBitmap::EncodedPixel<12,  WHITE>,
+										SmallBitmap::EncodedPixel<15,  WHITE>,
+										SmallBitmap::EncodedPixel<45,  WHITE>,
+										SmallBitmap::EncodedPixel<96,  WHITE>,
+										SmallBitmap::EncodedPixel<127, WHITE>
+															>
+																> bitmap_2;
 	SmallBitmap::Print<bitmap_2::result>::pr();
 }
