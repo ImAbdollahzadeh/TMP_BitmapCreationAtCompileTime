@@ -180,12 +180,12 @@ namespace SmallBitmap {
 		}
 	};
 }
-	template<size_t __sz, typename...__px> struct Bitmap {
-		static constexpr int BitmapPixelSize = __Bitmap<__sz, __px...>::BitmapPixelSize;
-		static constexpr int BitmapLightPixelsListSize = __Bitmap<__sz, __px...>::BitmapLightPixelsListSize;
-		static constexpr __int20 LightBitmap[sizeof...(__px)] = __Bitmap<__sz, __px...>::LightBitmap;
-		static int* DecodedPixelList;
-	};
+template<size_t __sz, typename...__px> struct Bitmap {
+	static constexpr int BitmapPixelSize = __Bitmap<__sz, __px...>::BitmapPixelSize;
+	static constexpr int BitmapLightPixelsListSize = __Bitmap<__sz, __px...>::BitmapLightPixelsListSize;
+	static constexpr __int20 LightBitmap[sizeof...(__px)] = __Bitmap<__sz, __px...>::LightBitmap;
+	static int* DecodedPixelList;
+};
 template<size_t __sz, typename...__px> int* Bitmap<__sz, __px...>::DecodedPixelList = Combine<__Bitmap<__sz, __px...>::BitmapPixelSize>::perform(
 	__Bitmap<__sz, __px...>::LightBitmap, __Bitmap<__sz, __px...>::BitmapLightPixelsListSize
 );
