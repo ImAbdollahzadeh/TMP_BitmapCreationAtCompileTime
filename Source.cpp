@@ -191,8 +191,7 @@ template<size_t __sz, typename...__px> int* Bitmap<__sz, __px...>::DecodedPixelL
 );
 struct Print {
 	static void print(int* _bitmapList, size_t sz) {
-		for (size_t i = 0; i != sz*sz; ++i)
-		{
+		for (size_t i = 0; i != sz*sz; ++i) {
 			std::cout << "Pixel (" << i / sz << "," << i - (i / sz)*sz << "):" << std::endl;
 			std::cout << *(_bitmapList + (4 * i)) << std::endl;
 			std::cout << *(_bitmapList + (4 * i) + 1) << std::endl;
@@ -202,8 +201,7 @@ struct Print {
 		}
 	}
 };
-int main()
-{
+int main() {
 	construct RGB<102, 11, 76>             BLENDEDCOLOR; 
 	construct RGB_From_Color<Color::WHITE> WHITE;
 	construct pixel<1, 2, BLENDEDCOLOR>    px1;
@@ -211,19 +209,21 @@ int main()
 	construct pixel<9, 9, WHITE>           px3;
 
 	constexpr int sz1 = 10;
-	typedef Bitmap<sz1, px1, px2, px3> bitmap;
+	construct Bitmap<sz1, px1, px2, px3> bitmap;
 	Print::print (
 		bitmap::DecodedPixelList,
 		bitmap::BitmapPixelSize
 	);
-	construct SmallBitmap::SmallBitmap<500, SmallBitmap::ListOfPixels<
-										SmallBitmap::EncodedPixel<1,   WHITE>,
-										SmallBitmap::EncodedPixel<12,  WHITE>,
-										SmallBitmap::EncodedPixel<15,  WHITE>,
-										SmallBitmap::EncodedPixel<45,  WHITE>,
-										SmallBitmap::EncodedPixel<96,  WHITE>,
-										SmallBitmap::EncodedPixel<127, WHITE>
-															>
-																> bitmap_2;
+	construct 
+		SmallBitmap::SmallBitmap<500, 
+					 SmallBitmap::ListOfPixels<
+								   SmallBitmap::EncodedPixel<1,   WHITE>,
+								   SmallBitmap::EncodedPixel<12,  WHITE>,
+								   SmallBitmap::EncodedPixel<15,  WHITE>,
+								   SmallBitmap::EncodedPixel<45,  WHITE>,
+								   SmallBitmap::EncodedPixel<96,  WHITE>,
+								   SmallBitmap::EncodedPixel<127, WHITE>
+													    >
+													       > bitmap_2;
 	SmallBitmap::Print<bitmap_2::result>::pr();
 }
