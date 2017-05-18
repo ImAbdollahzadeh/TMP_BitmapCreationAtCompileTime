@@ -168,13 +168,13 @@ namespace SmallBitmap {
 	};
 	template<typename SBitmap1, typename... SBitmaps> struct Add_SmallBitmaps {
 		static constexpr int SquareSize = SBitmap1::SquareSize;
-		typedef typename ZeroList<0, SquareSize>::result blackList;
-		typedef typename ConcatanatePixels<typename SBitmap1::result, typename Add_SmallBitmaps<SBitmaps...>::_result>::result _ListOfPixels;
-		typedef typename SmallBitmap<SquareSize, _ListOfPixels>::result result;
+		typedef typename SBitmap1::ListOfProvidedPixels ListOfProvidedPixels;
+		typedef typename ConcatanatePixels<ListOfProvidedPixels, typename Add_SmallBitmaps<SBitmaps...>::ListOfProvidedPixels>::result _result;
+		typedef typename SmallBitmap<SquareSize, _result>::result result;
 	};
 	template<typename SBitmap_last> struct Add_SmallBitmaps<SBitmap_last> {
 		static constexpr int SquareSize = SBitmap_last::SquareSize;
-		typedef typename SBitmap_last::result _result;
+		typedef typename SBitmap_last::ListOfProvidedPixels ListOfProvidedPixels;
 	};
 	template<typename list> struct Print {
 		static void pr() {
