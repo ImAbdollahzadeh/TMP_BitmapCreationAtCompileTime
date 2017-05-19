@@ -163,6 +163,7 @@ namespace SmallBitmap {
 	};
 	template<int Square_Size, typename _ListOfPixels> struct SmallBitmap {
 		static constexpr int SquareSize = Square_Size;
+		typedef _ListOfPixels ListOfProvidedPixels;
 		typedef typename ZeroList<0, Square_Size>::result blackList;
 		typedef typename ListMaker<Square_Size, blackList, _ListOfPixels>::result result;
 	};
